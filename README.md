@@ -25,7 +25,7 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - Python: The main programming language used for bot development.
 - Aiogram: A library for creating Telegram bots.
 - Sentence Transformers: A machine learning model for processing text queries.
-- FAISS: A library for efficient similarity search and clustering of dense vectors.
+- Chroma: A library for efficient similarity search and clustering of dense vectors.
 - Pandas and Numpy: Libraries for data processing and analysis.
 - Requests: A library for making HTTP requests to the Steam API.
 
