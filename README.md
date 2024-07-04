@@ -51,3 +51,11 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - [SainaAntonova](https://github.com/SainaAntonova): Development of the main functionality of the bot.
 - [Igor Svilanovich](https://github.com/svilanovich): Data processing and integration of machine learning models.
 
+
+
+
+
+create .env:
+BOT_TOKEN=
+STEAM_API_KEY=
+
