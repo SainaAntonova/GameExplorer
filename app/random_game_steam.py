@@ -1,12 +1,12 @@
 import os
 import csv
-import html
 import random
 import requests
 from datetime import datetime
 from dotenv import load_dotenv
 from aiogram import Bot, types
 from aiogram.types import ParseMode
+
 
 
 from app.keyboards import create_rating_keyboard, create_initial_keyboard
@@ -31,6 +31,7 @@ def get_random_steam_game():
         
         if game_details and game_details['type'] in ['game', 'dlc']:
             return game_details
+        
 def get_app_details(appid):
     url = f'http://store.steampowered.com/api/appdetails?appids={appid}'
     response = requests.get(url)
@@ -52,19 +53,27 @@ async def send_random_game(message: types.Message, keyboard=None):
     # Формирование информации о игре
     game_info = (
         f'<b>{game_name}</b>\n\n'
-        f'Go to<a href="{game_url}">link.</a>\n\n'
+        f'Go to<a href="{game_url}"> Steam page.</a>\n\n'
         f'OS: {plarform}\n\n'
         f'Type: {game_type}\n\n'
         f'Genre: {genres}\n\n'
         f'AppID: {game_id}'
         
-        
     )
+    
     if keyboard is None:
         keyboard = create_initial_keyboard()
+        
+    get_data_from_random(game_name, game_id)
 
+    print(f"Отправка сообщения с информацией об игре: {game_name} (AppID: {game_id})")
+    
     await message.answer(game_info, parse_mode=ParseMode.HTML, reply_markup=keyboard )
     
+
+def get_data_from_random(game_name, game_id):
+    return game_name, game_id
+
 
 async def save_game_data(telegram_user_id, game_name, game_id, rating):
     # Определение текущей даты и времени
@@ -76,10 +85,36 @@ async def save_game_data(telegram_user_id, game_name, game_id, rating):
         if file.tell() == 0:  # Проверка, пустой ли файл
             writer.writerow(['Date', 'Telegram_User_ID', 'AppID', 'Name', 'User_Rating'])  # Запись заголовков колонок
         
-        
         if rating is not None:
             writer.writerow([current_time, telegram_user_id, game_id, game_name, rating])
         else:
             writer.writerow([current_time, telegram_user_id, game_id, game_name, ''])
         
-  
+
+
+async def update_game_rating(telegram_user_id, game_name, game_id, rating):
+    try:
+        # Чтение данных из CSV файла
+        with open('/Users/mossyhead/ds_bootcamp/GameExplorer/app/users_db/user_ratings.csv', mode='r', newline='') as file:
+            reader = csv.reader(file)
+            rows = list(reader)
+        # Поиск строки с данными для обновления
+        for row in rows:
+            if row[1] == game_id:
+                row[3]= game_name
+                row[2] = int(telegram_user_id) # Обновление ID пользователя
+                row[4] = rating # Обновление оценки
+
+        # Запись обновленных данных в CSV файл
+        with open('/Users/mossyhead/ds_bootcamp/GameExplorer/app/users_db/user_ratings.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            # writer.writerow(['Date', 'Telegram_User_ID', 'AppID', 'Name', 'User_Rating'])
+            writer.writerows(rows)
+
+    except FileNotFoundError:
+        print("Ошибка: CSV-файл не найден.")
+    except Exception as e:
+        print(f"Error updating game rating: {e}")
+    
+
+
