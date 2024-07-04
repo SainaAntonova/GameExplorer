@@ -7,9 +7,11 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 
 ## Key Features
 
-- Text-Based Recommendations: Users can input text queries, and the bot will search for and recommend games based on the input text using natural language processing models.
+- Text-Based Recommendations: Users can choose filters, and the bot will search for and recommend games based on the input text using natural language processing models.
 - Random Game: The bot can suggest a random game or DLC from Steam.
 - Game Rating: Users can rate the recommended games, which helps improve recommendations and track their preferences.
+- Upcoming Games: Users can get new released games from Steam.
+- Favorites: Users can add favorite games to their list and get it
 
 
 ## Main Commands
@@ -17,8 +19,10 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - /start: Start interacting with the bot.
 - /help: Get a list of available commands.
 - /info: Information about the project.
-- /filters: Enter text queries to receive personalized game recommendations.
-- /random: Get a random game or DLC.
+- /filters: Choose filters and enter text queries to receive 10 personalized game recommendations.
+- /random: Get 1 a random game or DLC from Steam.
+- /upcoming: Get 3 new released games from Steam.
+- /favorites: Get your favorite list of apps.
 
 ## Technologies
 
@@ -26,7 +30,7 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - Aiogram: A library for creating Telegram bots.
 - Sentence Transformers: A machine learning model for processing text queries.
 - Chroma: A library for efficient similarity search and clustering of dense vectors.
-- Pandas and Numpy: Libraries for data processing and analysis.
+- Pandas, Scikit-learn and Numpy: Libraries for data processing and analysis.
 - Requests: A library for making HTTP requests to the Steam API.
 
 ## Project Structure
@@ -36,6 +40,10 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - app/handlers.py: Handlers for commands and user interactions.
 - app/keyboards.py: Creating keyboards and buttons for convenient user interaction.
 - app/model.py: Functions for processing text queries and finding recommendations.
+- app/feedback.py: To recieve feedback from users.
+- app/users_db/favotites.csv: Data of user's favorite games
+- app/users_db/feedback.csv: To collect recomendation ratings
+- app/users_db/user_ratings.csv: To collect game ratings
 
 ## Contributors
 
