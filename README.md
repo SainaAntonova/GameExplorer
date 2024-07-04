@@ -20,8 +20,8 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - /help: Get a list of available commands.
 - /info: Information about the project.
 - /filters: Choose filters and enter text queries to receive 10 personalized game recommendations.
-- /random: Get 1 a random game or DLC from Steam.
-- /upcoming: Get 3 new released games from Steam.
+- /random: Get 1 a random game or DLC from SteamAPI.
+- /upcoming: Get 3 new released games from SteamAPI.
 - /favorites: Get your favorite list of apps.
 
 ## Technologies
@@ -44,6 +44,7 @@ GameExplorer is a [Telegram bot](https://t.me/Game_Explorer_Bot) designed to sea
 - app/users_db/favotites.csv: Data of user's favorite games
 - app/users_db/feedback.csv: To collect recomendation ratings
 - app/users_db/user_ratings.csv: To collect game ratings
+- model/proj/: Embeddings, ChromaDB
 
 ## Contributors
 
